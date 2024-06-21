@@ -58,7 +58,7 @@ export default async function Login({
       return redirect("/login?message=No se pudo iniciar sesión, Intenta de nuevo");
     }
 
-    return redirect("dashboard");
+    return redirect("categories");
   };
 
 
