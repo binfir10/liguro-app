@@ -24,12 +24,13 @@ export default async function Login({
   const signWithGoogle = async () => {
     "use server";
     const origin = headers().get('origin');
+    const urlPage = process.env.NEXT_PUBLIC_URL!
     
     const supabase = createClient();
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${origin}/auth/callback`,
+        redirectTo: `${urlPage}/auth/callback`,
       },
     });
     if (error) {
