@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -10,6 +11,10 @@ export async function GET(request: Request) {
     const supabase = createClient();
     await supabase.auth.exchangeCodeForSession(code);
   }
+ revalidatePath('/');
 
-  return NextResponse.redirect(`${origin}/categories`);
+  // Constructs the URL to redirect to after the sign in process completes
+  const redirectTo = new URL('/', origin);
+
+  return NextResponse.redirect(redirectTo);
 }
