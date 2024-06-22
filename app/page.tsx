@@ -1,4 +1,5 @@
 
+import { signOut } from "@/lib/actions";
 import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,12 +11,6 @@ export default async function Home() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const signOut = async () => {
-    "use server";
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    return redirect("login");
-  };
   return (
     <section>
       {
@@ -31,7 +26,7 @@ export default async function Home() {
           ) : (
             <div>
               <h1>You are not logged in.</h1>
-              <Link href="/login">Incia Sesion</Link>
+              <Link href="/auth">Incia Sesion</Link>
             </div>
             )
 

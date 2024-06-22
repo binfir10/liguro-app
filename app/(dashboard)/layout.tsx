@@ -15,7 +15,7 @@ export default async function DashboardLayout({
     return (
       <div>
         <h1>You are not logged in.</h1>
-        <Link href="/login">Inicia Sesion</Link>
+        <Link href="/auth">Inicia Sesion</Link>
       </div>
     );
   }

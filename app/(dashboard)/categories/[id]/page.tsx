@@ -13,7 +13,7 @@ export default function page({params} : {params:string}) {
     <section className='p-3 w-screen'>
 
       <div className='flex items-center justify-between text-center py-4'>
-        <h1 className='font-bold font-mono text-5xl text-left text-balance'>
+        <h1 className='font-bold  text-5xl text-left text-balance'>
 
           Diseño Web
         </h1>

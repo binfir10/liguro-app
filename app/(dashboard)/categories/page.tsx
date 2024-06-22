@@ -21,17 +21,13 @@ export default function page() {
         />
       </div>
 
-      <Input placeholder="Buscar" className="my-4" />
+      <Input placeholder="Buscar..." className="my-4" />
       <div className="flex flex-col gap-1">
         {categoriesList.map((category) => {
           return (
             <Card
               key={category.title}
-              className={`p-2 flex w-full justify-between items-center  group`} style={
-                { backgroundColor: category.color
-
-                  }
-              }>
+              className={`p-2 flex w-full justify-between items-center  group`} >
               <Link href={`/categories/${category.href}`} className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +39,12 @@ export default function page() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="mr-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+                  className="mr-2 h-4 w-4 transition-transform group-hover:translate-x-1 rounded-full" style={
+                    {
+                      backgroundColor: category.color
+
+                    }
+                  }
                 >
                   <polyline points="9 6 15 12 9 18" />
                 </svg>{" "}
@@ -75,17 +76,17 @@ const categoriesList = [
   {
     title: "Diseño Web",
     href: "/desing",
-    color: "#4f4"
+    color: "rgb(34 197 94 / 1)"
     
   },
   {
     title: "Desarrollo Web",
     href: "/development",
-    color: "#4f3245"
+    color: "rgb(185 28 28/1)"
   },
   {
     title: "Marketing Digital",
     href: "/marketing",
-    color: "#324f4f"
+    color: "rgb(3 105 161/1)"
   },
 ];
