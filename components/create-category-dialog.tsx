@@ -3,6 +3,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -22,18 +23,22 @@ import {
 import { CategoryType } from "@/types/types";
 import { ReactNode } from "react";
 interface Props {
-  trigger: ReactNode;
+  trigger?: ReactNode;
   type: CategoryType;
+  isOpen?: boolean;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function CategoryDialog({ trigger, type }: Props) {
+export function CategoryDialog({ trigger, isOpen, setIsOpen, type }: Props) {
   let types = type === "create" ? "Crea una" : "Edita la";
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{types} Categoria</DialogTitle>
+          <DialogDescription>Completa los datos </DialogDescription>
+
         </DialogHeader>
         <div className="flex  flex-col space-y-4">
           <div className="space-y-1">
@@ -46,16 +51,7 @@ export function CategoryDialog({ trigger, type }: Props) {
             />
           </div>
           <div className="flex items-center gap-2">
-            <Label>Elegi un Color:</Label>
-            <Input
-              id="category"
-              placeholder="New Category"
-              type="color"
-              className="w-20 p-0 border-none"
-            />
-          </div>
-          <div className="flex items-center gap-2">
-            <Label>Status:</Label>
+            <Label>Color:</Label>
             <Select>
               <SelectTrigger>
                 <SelectValue placeholder="Selecciona un estado" />

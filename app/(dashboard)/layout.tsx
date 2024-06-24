@@ -1,5 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({
   children,
@@ -12,12 +13,7 @@ export default async function DashboardLayout({
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return (
-      <div>
-        <h1>You are not logged in.</h1>
-        <Link href="/auth">Inicia Sesion</Link>
-      </div>
-    );
+    redirect("/auth");
   }
   return (
     <>

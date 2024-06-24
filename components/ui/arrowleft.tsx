@@ -15,7 +15,7 @@ export default function ArrowRight({ status }: ArrowRightProps) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={` h-4 w-4  ${status === "error" ? "text-red-500" : status === "success" ? "text-green-500" : "text-yellow-500"}`}
+      className={` h-4 min-h-4 min-w-4 w-4  ${status === "error" ? "text-red-500" : status === "success" ? "text-green-500" : "text-yellow-500"}`}
     >
       <polyline points="9 6 15 12 9 18" />
     </svg>
