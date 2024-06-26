@@ -24,7 +24,7 @@ export default async function page({
         <div className="flex flex-wrap justify-end gap-2 items-center">
           <TaskDialog
             trigger={
-              <Button variant="secondary">
+              <Button variant="default">
                 <BadgePlus className="w-5 h-5 mr-2" />
                 Agregar
               </Button>
