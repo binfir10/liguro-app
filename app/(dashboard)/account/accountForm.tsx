@@ -23,7 +23,7 @@ export default function AccountForm({ user }: { user: User | null }) {
 
             const { data, error, status } = await supabase
                 .from("users")
-                .select(`full_name, username, public_id, avatar_url, genre`)
+                .select(`*`)
                 .eq("id", user?.id)
                 .single();
 
@@ -33,11 +33,11 @@ export default function AccountForm({ user }: { user: User | null }) {
             }
 
             if (data) {
-                setFullname(data.full_name);
-                setUsername(data.username);
-                setpublic_id(data.public_id);
-                setImageUrl(data.avatar_url);
-                setGenre(data.genre);
+                setFullname(data.name);
+                setUsername(data.email);
+                //setpublic_id(data.public_id);
+                //setImageUrl(data.avatar_url);
+                //setGenre(data.genre);
             }
         } catch (error) {
             alert("Error loading user data!");
@@ -61,39 +61,39 @@ export default function AccountForm({ user }: { user: User | null }) {
     
 
     async function updateProfile({
-        username,
+        name,
     }: {
-        username: string | null;
-        fullname: string | null;
+        name: string | null;
+
     }) {
         try {
             setLoading(true);
 
-            const { error } = await supabase.from("profiles").upsert({
+            const { error } = await supabase.from("users").upsert({
                 id: user?.id as string,
-                full_name: fullname,
-                username,
-                avatar_url: imageUrl,
-                public_id,
-                genre: genre,
-                updated_at: new Date().toISOString(),
+                name: name
+                //username,
+                //avatar_url: imageUrl,
+                //public_id,
+                //genre: genre,
+                //updated_at: new Date().toISOString(),
             });
             if (error) throw error;
             const { data } = await supabase.auth.updateUser({
                 data: {
-                    name: username,
-                    full_name: fullname,
-                    avatar_url: imageUrl,
-                    picture: imageUrl,
-                    public_id,
-                    genre: genre,
+                    name: name,
+                    //full_name: fullname,
+                    //avatar_url: imageUrl,
+                    //picture: imageUrl,
+                    //public_id,
+                    //genre: genre,
                 },
             });
 
             if (error) throw error;
 
             alert("Profile updated!");
-            router.push("/");
+            router.push("/categories");
         } catch (error) {
             alert("Error updating the data!");
         } finally {
@@ -117,7 +117,7 @@ export default function AccountForm({ user }: { user: User | null }) {
                     onChange={(e) => setFullname(e.target.value)}
                 />
             </div>
-            <div className="mb-4">
+            {/*<div className="mb-4">
                 <Label htmlFor="username">Usuario</Label>
                 <Input
                     id="username"
@@ -138,7 +138,7 @@ export default function AccountForm({ user }: { user: User | null }) {
                     <option value="Hombre">Hombre</option>
                     <option value="Mujer">Mujer</option>
                 </select>
-            </div>
+            </div>*/}
 {/*
             <ImageCloudinary
                 imageUrl={imageUrl}
@@ -150,7 +150,7 @@ export default function AccountForm({ user }: { user: User | null }) {
             <div className="mb-4 mt-4">
                 <Button
                     className={`${loading ? "cursor-not-allowed" : ""}`}
-                    onClick={() => updateProfile({ fullname, username })}
+                    onClick={() => updateProfile({name: fullname })}
                     disabled={loading}>
                     {loading ? "Actualizando ..." : "Actualizar"}
                 </Button>

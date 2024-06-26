@@ -3,6 +3,7 @@ import { Fira_Code } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-providers";
 import Navbar from "@/components/navbar";
+import { Toaster } from "@/components/ui/toaster";
 
 const firacode = Fira_Code({ subsets: ["latin"] });
 
@@ -25,9 +26,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange>
           <Navbar />
-          <main className="flex flex-col items-center justify-center max-w-5xl w-full">
+          <main className="flex flex-col items-center justify-center">
             {children}
           </main>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

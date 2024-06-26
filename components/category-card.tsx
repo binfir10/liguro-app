@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { getCategories } from "@/lib/actions/get-actions";
 import { ICategories } from "@/types/types";
 import { Search } from "lucide-react";
@@ -7,10 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { ActionsMenu } from "./menu-actions";
-
-interface CategoryCardProps {
-  categories: ICategories[];
-}
+import CategoryCardSkeleton from "@/app/(dashboard)/categories/loading";
 
 export default function CategoryCard() {
   const [categories, setCategories] = useState<ICategories[]>([]);
@@ -25,7 +22,7 @@ export default function CategoryCard() {
       } catch (error) {
         console.error("Error fetching categories:", error);
       } finally {
-        setIsLoading(false); // Set loading to false regardless of success or error
+        setIsLoading(false); 
       }
     };
 
@@ -48,17 +45,26 @@ export default function CategoryCard() {
       </div>
 
       {isLoading ? (
-        <div className="flex items-center justify-center my-10 font-semibold">
-          Cargando categorías...
-        </div>
+        <>
+
+        <CategoryCardSkeleton/>
+        <CategoryCardSkeleton/>
+        <CategoryCardSkeleton/>
+        <CategoryCardSkeleton/>
+        <CategoryCardSkeleton/>
+        <CategoryCardSkeleton/>
+</>
+        
       ) : (
+          <Suspense fallback={<CategoryCardSkeleton />}>
+
         <div className="flex flex-col gap-1">
           {filteredCategories.length > 0 ? (
             filteredCategories.map(({ id, name, color }) => (
               <Card
                 key={id}
                 className={`p-2 flex w-full justify-between items-center  group`}
-              >
+                >
                 <Link href={`/categories/${id}`} className="flex items-center">
                   <div className="flex justify-between items-center">
                     <svg
@@ -87,6 +93,7 @@ export default function CategoryCard() {
             </span>
           )}
         </div>
+      </Suspense>
       )}
     </>
   );

@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { TrashIcon } from 'lucide-react';
 import { deleteCategory, deleteTask } from "@/lib/actions/delete-actions";
+import { toast } from "./ui/use-toast";
 
 interface DeleteButtonProps {
   id: string;
@@ -30,10 +31,22 @@ export const DeleteButton: React.FC<DeleteButtonProps> = ({ id, type, onClick })
   const handleClick = async () => {
     setIsLoading(true);
     const onDelete = type === 'task' ? deleteTask : deleteCategory;
-    const result = await onDelete(id);
-    if (result.success) {
-      router.refresh();
+    try {
+      const result = await onDelete(id);
+      if (result.success) {
+        toast({
+          title: '✅ Se elimino con exito',
+        })
+        router.refresh();
+      }
+    } catch (error) {
+      console.error('Error al eliminar:', error);
+      toast({
+        variant: 'destructive',
+        title: '❌ Hubo un error, Vuelva a intentar'
+      })
     }
+   
     setIsLoading(false);
     setIsDialogOpen(false); // Cerrar el diálogo después de la eliminación
   };

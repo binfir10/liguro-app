@@ -13,6 +13,7 @@ import { CategoryType, ICategories } from "@/types/types";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
+import { toast } from "./ui/use-toast";
 
 interface Props {
   trigger?: ReactNode;
@@ -75,13 +76,19 @@ export function CategoryDialog({
     event.preventDefault();
     const result = await handleSubmitCategory(type, id, name, color);
     if (result?.success) {
+      const toastes = type === "create" ? "✅ Se creo la categoria con exito " : "✅ Se edito la ta categoria con exito"
+      toast({
+        title: toastes
+      })
       router.refresh()
-      
-      // Aquí puedes manejar el éxito de la operación, como cerrar el diálogo
-      console.log("Operación exitosa:", result.data);
+      console.log('Operación exitosa:', result.data);
     } else {
       // Manejar errores aquí
-      console.error("Error en la operación:", result?.error);
+      toast({
+        variant: "destructive",
+        title: '❌ Hubo un error, Vuelva a intentar'
+      })
+      console.error('Error en la operación:', result?.error);
     }
   };
 

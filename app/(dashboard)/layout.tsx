@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -17,6 +18,8 @@ export default async function DashboardLayout({
   return (
     <section className="max-w-5xl w-full">
     {children}
+      <Toaster />
+
     </section>
   );
 }
