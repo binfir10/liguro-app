@@ -7,7 +7,8 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { ActionsMenu } from "./menu-actions";
-import CategoryCardSkeleton from "@/app/(dashboard)/categories/loading";
+import CategoryCardSkeleton from "./skeletonCard";
+
 
 export default function CategoryCard() {
   const [categories, setCategories] = useState<ICategories[]>([]);

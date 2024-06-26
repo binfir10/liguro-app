@@ -7,10 +7,14 @@ import { getCategoryById, getTasks } from "@/lib/actions/get-actions";
 import { ITasks } from "@/types/types";
 import { BadgePlus, Car } from "lucide-react";
 
-export default async function page({ params: { id } }: { params: { id: string } }) {
-  const categoryData = await getCategoryById(id)
+export default async function page({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
+  const categoryData = await getCategoryById(id);
   const tasks = await getTasks(id);
-  
+
   return (
     <div className="p-3">
       <div className="flex items-center justify-between text-center py-4">
@@ -29,52 +33,29 @@ export default async function page({ params: { id } }: { params: { id: string } 
           />
         </div>
       </div>
-
       <div className="flex flex-col gap-1">
-        {
-          tasks.length !== 0 ? (
-            tasks.map((task : ITasks) => {
-                return (
-                  <Card
-                    key={task.title}
-                    className="p-2 flex w-full justify-between items-center  group ">
-                    <div className="flex items-center gap-2 transition-transform justify-between group-hover:translate-x-1">
-                      <ArrowRight status={task.status} />
-                      <span className="text-base text-balance tracking-tighter font-thin">
-                        {task.title}
-                      </span>
-                    </div>
-                    <ActionsMenu state="task" id={task.id}   />
-                  </Card>
-                );
-              })
-            
-          ): (
-              <span className="flex items-center justify-center my-10 font-semibold">No hay tareas</span>
-
-          )
-        }
-       
+        {tasks.length !== 0 ? (
+          tasks.map((task: ITasks) => {
+            return (
+              <Card
+                key={task.title}
+                className="p-2 flex w-full justify-between items-center  group ">
+                <div className="flex items-center gap-2 transition-transform justify-between group-hover:translate-x-1">
+                  <ArrowRight status={task.status} />
+                  <span className="text-base text-balance tracking-tighter font-thin">
+                    {task.title}
+                  </span>
+                </div>
+                <ActionsMenu state="task" id={task.id} />
+              </Card>
+            );
+          })
+        ) : (
+          <span className="flex items-center justify-center my-10 font-semibold">
+            No hay tareas
+          </span>
+        )}
       </div>
     </div>
   );
 }
-
-const categoriesList = [
-  {
-    title: "Diseño Web",
-    status: "error",
-  },
-  {
-    title: "Desarrollo Web",
-    status: "pending",
-  },
-  {
-    title: "Marketing Digital",
-    status: "success",
-  },
-  {
-    title: "Cambiar el color del hero y agregar texto",
-    status: "success",
-  },
-];
