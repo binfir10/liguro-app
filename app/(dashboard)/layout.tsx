@@ -15,8 +15,8 @@ export default async function DashboardLayout({
     redirect("/auth");
   }
   return (
-    <>
+    <section className="max-w-5xl w-full">
     {children}
-    </>
+    </section>
   );
 }

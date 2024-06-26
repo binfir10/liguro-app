@@ -1,6 +1,5 @@
 "use client";
-
-import { Button } from './ui/button';
+import { Button } from "@/components/ui/button";
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import {
@@ -15,36 +14,39 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { TrashIcon } from 'lucide-react';
+import { deleteCategory, deleteTask } from "@/lib/actions/delete-actions";
 
 interface DeleteButtonProps {
   id: string;
   type: 'task' | 'category';
-  onDelete: (id: string) => Promise<{ success: boolean, error?: any }>;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export const DeleteButton: React.FC<DeleteButtonProps> = ({ id, type, onDelete}) => {
+export const DeleteButton: React.FC<DeleteButtonProps> = ({ id, type, onClick }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // Estado para controlar el diálogo
   const router = useRouter();
 
   const handleClick = async () => {
     setIsLoading(true);
+    const onDelete = type === 'task' ? deleteTask : deleteCategory;
     const result = await onDelete(id);
     if (result.success) {
       router.refresh();
     }
     setIsLoading(false);
- ; // Cerrar el diálogo de eliminación después de la acción
+    setIsDialogOpen(false); // Cerrar el diálogo después de la eliminación
   };
 
- 
-  
   return (
-    <AlertDialog>
+    <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive" size="sm" className="flex items-center justify-center">
-          <TrashIcon className="text-red-500 hover:text-red-700 mr-2 h-4 w-4" />
-          <span>Borrar</span>
-        </Button>
+        <div onClick={onClick} className=" flex items-center cursor-pointer">
+ 
+            <TrashIcon className="text-red-500 hover:text-red-700  mr-2 h-4 w-4" />
+            <span>Borrar</span>
+        
+        </div>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -56,7 +58,7 @@ export const DeleteButton: React.FC<DeleteButtonProps> = ({ id, type, onDelete})
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
           <AlertDialogAction onClick={handleClick} className="bg-destructive text-destructive-foreground hover:bg-destructive/80">
-            Continuar
+            {isLoading ? "Eliminando..." : "Continuar"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

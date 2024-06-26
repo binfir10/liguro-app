@@ -13,10 +13,17 @@ import { TaskDialog } from "./create-task-dialog";
 import { useState } from "react";
 import { CategoryDialog } from "./create-category-dialog";
 import { DeleteButton } from "./delete-button";
-import { deleteCategory, deleteTask } from "@/lib/actions/delete-actions";
 
 export function ActionsMenu({ state, id }: { state: string; id: string }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
+  const handleDeleteClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setIsDeleteOpen(true);
+  };
+
+  console.log("edit Open: ", isEditOpen);
 
   return (
     <>
@@ -37,15 +44,17 @@ export function ActionsMenu({ state, id }: { state: string; id: string }) {
               <PencilIcon className="text-foreground mr-2 h-4 w-4" />
               <span>Editar</span>
             </DropdownMenuItem>
-
-          </DropdownMenuGroup>
-          <DropdownMenuGroup>
-
-            <DropdownMenuItem className="hover:bg-card"  >
-             
+            <DropdownMenuItem className="hover:bg-card" asChild>
+              <div>
+                <DeleteButton
+                  id={id}
+                  type={state === "category" ? "category" : "task"}
+                  onClick={handleDeleteClick}
+                />
+              </div>
             </DropdownMenuItem>
           </DropdownMenuGroup>
-          <DropdownMenuSeparator />
+    
         </DropdownMenuContent>
       </DropdownMenu>
 
@@ -57,15 +66,13 @@ export function ActionsMenu({ state, id }: { state: string; id: string }) {
           id={id}
         />
       ) : (
-        <TaskDialog setIsOpen={setIsEditOpen} isOpen={isEditOpen} type="edit" id={id} />
+        <TaskDialog
+          setIsOpen={setIsEditOpen}
+          isOpen={isEditOpen}
+          type="edit"
+          id={id}
+        />
       )}
-      <DeleteButton
-        id={id}
-        type={state === "category" ? "category" : "task"}
-        onDelete={state === "category" ? deleteCategory : deleteTask}
-
-
-      />
     </>
   );
 }

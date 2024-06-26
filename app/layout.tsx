@@ -25,7 +25,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange>
           <Navbar />
-          <main className="flex flex-col items-center justify-between">
+          <main className="flex flex-col items-center justify-center max-w-5xl w-full">
             {children}
           </main>
         </ThemeProvider>

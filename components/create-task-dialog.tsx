@@ -27,7 +27,7 @@ import { handleSubmitTask } from "@/lib/actions/submit-actions";
 import { ITasks, TaskType } from "@/types/types";
 import moment from "moment";
 import { useParams, useRouter } from "next/navigation";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
 interface Props {
   trigger?: ReactNode;
   type: TaskType;
@@ -50,7 +50,7 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
 
 
   useEffect(() => {
-    if (id && type === "edit") {
+    if (isOpen && id && type === "edit") {
       const fetchTask = async () => {
         const taskData = await getTaskById(id);
         if (taskData) {
@@ -62,7 +62,7 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
       };
       fetchTask();
     }
-  }, [id, type]);
+  }, [isOpen, id, type]);
   const date = new Date(createAt)
   moment.locale('es');
   const newDate = moment(date).fromNow();
@@ -81,12 +81,32 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
     }
   };
 
+
+  const dialogRef = useRef<HTMLDivElement>(null); // Establece el tipo de useRef explícitamente
+
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      if (isOpen && dialogRef.current) {
+        const windowHeight = window.innerHeight;
+        const dialogHeight = dialogRef.current.offsetHeight; // Accede a offsetHeight
+        const topPosition = Math.max(0, (windowHeight - dialogHeight) / 2);
+        dialogRef.current.style.top = `${topPosition}px`; // Accede a style
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isOpen]);
   
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen} >
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md" ref={dialogRef}>
         <DialogHeader>
           <DialogTitle>{types} Tarea</DialogTitle>
           <DialogDescription> {createAt ? `Creado hace ${newDate}` : "Completa los datos"}</DialogDescription>

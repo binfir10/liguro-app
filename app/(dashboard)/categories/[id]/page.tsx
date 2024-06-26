@@ -12,7 +12,7 @@ export default async function page({ params: { id } }: { params: { id: string } 
   const tasks = await getTasks(id);
   
   return (
-    <section className="p-3 w-screen">
+    <div className="p-3">
       <div className="flex items-center justify-between text-center py-4">
         <h1 className="font-bold capitalize max-sm:text-3xl text-5xl text-left text-balance">
           {categoryData?.name}
@@ -56,7 +56,7 @@ export default async function page({ params: { id } }: { params: { id: string } 
         }
        
       </div>
-    </section>
+    </div>
   );
 }
 

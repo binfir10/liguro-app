@@ -14,6 +14,8 @@ import {
 import { MenuIcon } from 'lucide-react'
 import { ModeToggle } from './ui/theme-toggle'
 import { useEffect, useState } from "react"
+import { Button } from "./ui/button"
+import { signOut } from "@/lib/actions/auth-actions"
 
 export default function NavbarMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +55,13 @@ export default function NavbarMenu() {
 
             <SheetFooter>
               <Link href={'/categories'} className='mr-4' onClick={() => setIsOpen(false)}>Categories</Link>
-              <Link href={'/auth'} className='mr-4' onClick={() => setIsOpen(false)}>Auth</Link>
+              <form
+                action={signOut}
+                className="">
+                <Button  variant={"link"}>
+                  Cerrar Sesion
+                </Button>
+              </form>
             </SheetFooter>
           </SheetContent>
         </Sheet>

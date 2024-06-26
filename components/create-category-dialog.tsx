@@ -7,7 +7,7 @@ import { Select,SelectContent,SelectGroup, SelectItem, SelectLabel,SelectTrigger
 } from "@/components/ui/select";
 import { getCategoryById } from "@/lib/actions/get-actions";
 import { handleSubmitCategory } from "@/lib/actions/submit-actions";
-import { colorsName } from "@/lib/constants";
+import { hexaName } from "@/lib/constants";
 import 'moment/locale/es';
 import { CategoryType, ICategories } from "@/types/types";
 import moment from "moment";
@@ -38,7 +38,7 @@ export function CategoryDialog({
   console.log("desde category", isOpen);
   
   useEffect(() => {
-    if (id && type === "edit") {
+    if (isOpen && id && type === "edit") {
       const fetchCategory = async () => {
         const categoryData = await getCategoryById(id);
         if (categoryData) {
@@ -50,13 +50,13 @@ export function CategoryDialog({
       };
       fetchCategory();
     }
-  }, [id, type]);
+  }, [isOpen,id, type]);
 
   useEffect(() => {
     if (color) {
       const defaultColorObj = findColorByName(color);
       if (defaultColorObj) {
-        setColor(defaultColorObj.color);
+        setColor(defaultColorObj.hexa);
       }
     }
   }, [color]);
@@ -64,7 +64,7 @@ export function CategoryDialog({
   let types = type === "create" ? "Crea una" : "Edita la";
 
   const findColorByName = (colorValue: any) => {
-    return colorsName.find((color) => color.color === colorValue);
+    return hexaName.find((color) => color.hexa === colorValue);
   };
 
   const date = new Date(createAt);
@@ -92,7 +92,7 @@ export function CategoryDialog({
         <DialogHeader>
           <DialogTitle>{types} Categoria</DialogTitle>
           <DialogDescription>
-            {createAt ? `Ult Act ${newDate}` : "Completa los datos"}
+            {createAt ? `Creado hace ${newDate}` : "Completa los datos"}
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleFormSubmit}>
@@ -117,13 +117,13 @@ export function CategoryDialog({
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Estado</SelectLabel>
-                    {colorsName.map((color) => (
-                      <SelectItem key={color.id} value={color.color}>
-                        <div className="flex gap-1 items-center justify-center">
+                    {hexaName.map((color) => (
+                      <SelectItem key={color.id} value={color.hexa}>
+                        <div className="flex gap-1 items-center  justify-center">
                           <div
-                            className={`w-4 h-4 ${color.color} rounded-full`}
-                          />
-                          <span className="">{color.name}</span>
+                            className={`w-4 h-4 ${color.hexa} rounded-full border`}
+                          ></div>
+                          <span className={`${color}`}>{color.name}</span>
                         </div>
                       </SelectItem>
                     ))}

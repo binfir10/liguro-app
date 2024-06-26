@@ -9,7 +9,7 @@ export default async function page() {
   //const categories: ICategories[] = await getCategories();
 
   return (
-    <section className="mt-5 p-3 w-screen">
+    <div className="mt-5 p-3">
       <div className="flex items-center justify-between text-center py-4">
         <h1 className="font-bold font-serif max-sm:text-3xl text-5xl">Categorias</h1>
         <CategoryDialog
@@ -23,6 +23,6 @@ export default async function page() {
       </div>
       
       <CategoryCard />
-    </section>
+    </div>
   );
 }
