@@ -3,6 +3,8 @@ import { CategoryDialog } from "@/components/create-category-dialog";
 import { Button } from "@/components/ui/button";
 import { BadgePlus } from "lucide-react";
 
+export const revalidate = 0
+
 export default async function page() {
   return (
     <div className="mt-5 p-3 items-center">
