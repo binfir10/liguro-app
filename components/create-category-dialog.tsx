@@ -36,8 +36,6 @@ export function CategoryDialog({
   const [color, setColor] = useState("");
   const [createAt, setCreateAt] = useState("");
 
-  console.log("desde category", isOpen);
-  
   useEffect(() => {
     if (isOpen && id && type === "edit") {
       const fetchCategory = async () => {

@@ -23,8 +23,6 @@ export function ActionsMenu({ state, id }: { state: string; id: string }) {
     setIsDeleteOpen(true);
   };
 
-  console.log("edit Open: ", isEditOpen);
-
   return (
     <>
       <DropdownMenu>

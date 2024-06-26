@@ -1,10 +1,11 @@
 {
     "theme_color": "#0e0e0e",
     "background_color": "#000000",
-    "display": "fullscreen",
+    "display": "standalone",
     "scope": "/",
     "start_url": "/",
     "name": "Liguro",
+  "orientation": "portrait",
     "short_name": "Liguro",
     "icons": [
         {
