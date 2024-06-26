@@ -10,8 +10,9 @@ export default async function Login({
 }: {
   searchParams: { message: string };
 }) {
+
   return (
-    <div className=" flex flex-col w-full justify-center gap-2 text-foreground border p-5 rounded-lg border-foreground/10 bg-card shadow-lg max-md:mt-14">
+    <div className=" flex flex-col w-full justify-center gap-2 text-foreground  p-5 rounded-lg border-foreground/10 bg-card">
       <h3 className="text-2xl font-bold text-foreground/90 text-balance mb-6">
         Ingresa con tu cuenta
       </h3>
@@ -53,12 +54,6 @@ export default async function Login({
           pendingText="Iniciando Sesion...">
           Iniciar Sesion
         </SubmitButton>
-
-        {searchParams?.message && (
-          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
-            {searchParams.message}
-          </p>
-        )}
       </form>
     </div>
   );

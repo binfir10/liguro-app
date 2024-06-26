@@ -54,7 +54,7 @@ export const DeleteButton: React.FC<DeleteButtonProps> = ({ id, type, onClick })
   return (
     <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <AlertDialogTrigger asChild>
-        <div onClick={onClick} className=" flex items-center cursor-pointer">
+        <div onClick={onClick} className=" w-full flex items-center cursor-pointer">
  
             <TrashIcon className="text-red-500 hover:text-red-700  mr-2 h-4 w-4" />
             <span>Borrar</span>

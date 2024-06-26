@@ -1,9 +1,8 @@
+import { ThemeProvider } from "@/components/theme-providers";
+import { Toaster } from "@/components/ui/toaster";
 import type { Metadata, Viewport } from "next";
 import { Fira_Code } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-providers";
-import Navbar from "@/components/navbar";
-import { Toaster } from "@/components/ui/toaster";
 
 const firacode = Fira_Code({ subsets: ["latin"] });
 
@@ -67,7 +66,6 @@ export default function RootLayout({
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange>
-          <Navbar />
           <main className="flex flex-col items-center justify-center">
             {children}
           </main>

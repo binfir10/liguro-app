@@ -3,6 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+
 export const signWithGoogle = async () => {
   const origin = headers().get("origin");
   const supabase = createClient();

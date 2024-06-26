@@ -11,7 +11,7 @@ export default async function Register({
   searchParams: { message: string };
 }) {
   return (
-    <div className="flex flex-col w-full justify-center gap-2 text-foreground border p-5 rounded-lg border-foreground/10 bg-card shadow-lg max-md:mt-14">
+    <div className="flex flex-col w-full justify-center gap-2 text-foreground p-5 rounded-lg border-foreground/10 bg-card ">
       <h3 className="text-2xl font-bold text-foreground/90 text-balance mb-6">
         Crea tu cuenta
       </h3>
@@ -51,11 +51,7 @@ export default async function Register({
           Registrarse
         </SubmitButton>
 
-        {searchParams?.message && (
-          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
-            {searchParams.message}
-          </p>
-        )}
+
       </form>
     </div>
   );

@@ -20,8 +20,8 @@ export default async function page({
   }
 
   return (
-    <section className="mt-10">
-      <Tabs defaultValue="login" className="w-[400px]">
+    <section className="h-screen flex items-center justify-center">
+      <Tabs defaultValue="login" className="w-[400px] shadow-lg shadow-foreground/70 border rounded-lg p-2">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="login">Login</TabsTrigger>
           <TabsTrigger value="register">Registro</TabsTrigger>

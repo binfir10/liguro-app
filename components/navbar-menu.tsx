@@ -19,25 +19,12 @@ import { signOut } from "@/lib/actions/auth-actions"
 
 export default function NavbarMenu() {
   const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const theme = useTheme()
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null; // or a loading spinner, or a fallback component
-  }
 
   return (
     <>
-    <Link href={"/"}>
-      {theme.resolvedTheme === "light" ? (<Image src="/logo-light.png" alt='' height={60} width={100} className='cursor-pointer aspect-auto' />)
-        :
-        (<Image src="/logo-dark.png" alt='' height={60} width={100} className='cursor-pointer aspect-auto' />)
-        
-      }
+    <Link href={"/"} className="font-black underline underline-offset-4">
+    LIGURO
 
     </Link>
       <div className='flex items-center gap-2'>

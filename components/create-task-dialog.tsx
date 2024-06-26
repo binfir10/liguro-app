@@ -69,7 +69,6 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
   let types = type === "create" ? "Crea una" : "Edita la";
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
     const result = await handleSubmitTask(
       type,
       id,
@@ -79,6 +78,7 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
       description
     );
     if (result?.success) {
+      router.refresh();
       const toastes =
         type === "create"
           ? "✅ Se creo la tarea con exito"
@@ -86,7 +86,6 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
       toast({
         title: toastes,
       });
-      router.refresh();
       console.log("Operación exitosa:", result.data);
     } else {
       // Manejar errores aquí
@@ -98,30 +97,11 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
     }
   };
 
-  const dialogRef = useRef<HTMLDivElement>(null); // Establece el tipo de useRef explícitamente
-
-  useLayoutEffect(() => {
-    const handleResize = () => {
-      if (isOpen && dialogRef.current) {
-        const windowHeight = window.innerHeight;
-        const dialogHeight = dialogRef.current.offsetHeight; // Accede a offsetHeight
-        const topPosition = Math.max(0, (windowHeight - dialogHeight) / 2);
-        dialogRef.current.style.top = `${topPosition}px`; // Accede a style
-      }
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [isOpen]);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="sm:max-w-md" ref={dialogRef}>
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{types} Tarea</DialogTitle>
           <DialogDescription>

@@ -43,7 +43,7 @@ export function ActionsMenu({ state, id }: { state: string; id: string }) {
               <span>Editar</span>
             </DropdownMenuItem>
             <DropdownMenuItem className="hover:bg-card" asChild>
-              <div>
+              <div className="w-full">
                 <DeleteButton
                   id={id}
                   type={state === "category" ? "category" : "task"}
