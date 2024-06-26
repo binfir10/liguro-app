@@ -6,9 +6,27 @@ export async function GET(request: Request) {
   const code = requestUrl.searchParams.get("code");
   const origin = requestUrl.origin;
 
-  if (code) {
+if (code) {
     const supabase = createClient();
-    await supabase.auth.exchangeCodeForSession(code);
+    const { data} = await supabase.auth.exchangeCodeForSession(code);
+    
+    const { data: { user } } = await supabase.auth.getUser();
+
+    // Guardar los datos del usuario en una tabla en Supabase
+    const {data: abs, error } = await supabase
+      .from('users')
+      .insert({
+        id: user?.id,
+        email: user?.email,
+        name: user?.user_metadata?.full_name,
+        // Agregar otros campos que desees guardar
+      });
+
+    if (error) {
+      console.error(error);
+    } else {
+      console.log(`Usuario creado con éxito: ${data}`);
+    }
   }
 
   return NextResponse.redirect(`${origin}/categories`);

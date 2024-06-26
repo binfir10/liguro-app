@@ -19,20 +19,17 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={`${firacode.className} min-h-dvh`}>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="dark"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <Navbar />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange>
+          <Navbar />
           <main className="flex flex-col items-center justify-between">
-
-        {children}
-        </main >
-
-      </ThemeProvider>
-        </body>
+            {children}
+          </main>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

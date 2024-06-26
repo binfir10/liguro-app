@@ -1,10 +1,12 @@
-
 import CategoryCard from "@/components/category-card";
 import { CategoryDialog } from "@/components/create-category-dialog";
 import { Button } from "@/components/ui/button";
+import { getCategories } from "@/lib/actions/get-actions";
+import { ICategories } from "@/types/types";
 import { BadgePlus } from "lucide-react";
 
-export default function page() {
+export default async function page() {
+  //const categories: ICategories[] = await getCategories();
 
   return (
     <section className="mt-5 p-3 w-screen">
@@ -19,9 +21,8 @@ export default function page() {
           type="create"
         />
       </div>
-      <CategoryCard />
       
+      <CategoryCard />
     </section>
   );
 }
-
