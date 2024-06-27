@@ -9,26 +9,14 @@ import Link from "next/link";
 import { ActionsMenu } from "./menu-actions";
 import CategoryCardSkeleton from "./skeletonCard";
 
+interface Props {
+  categories: ICategories[];
+}
 
-export default function CategoryCard() {
-  const [categories, setCategories] = useState<ICategories[]>([]);
+
+export default function CategoryCard({categories}: Props) {
+
   const [searchQuery, setSearchQuery] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const fetchedCategories = await getCategories();
-        setCategories(fetchedCategories);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      } finally {
-        setIsLoading(false); 
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const filteredCategories = categories.filter((category) =>
     category.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -45,18 +33,6 @@ export default function CategoryCard() {
         />
       </div>
 
-      {isLoading ? (
-        <>
-
-        <CategoryCardSkeleton/>
-        <CategoryCardSkeleton/>
-        <CategoryCardSkeleton/>
-        <CategoryCardSkeleton/>
-        <CategoryCardSkeleton/>
-        <CategoryCardSkeleton/>
-</>
-        
-      ) : (
           <Suspense fallback={<CategoryCardSkeleton />}>
 
         <div className="flex flex-col gap-1">
@@ -78,7 +54,7 @@ export default function CategoryCard() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className={`mr-2 h-4 w-4 transition-transform group-hover:translate-x-1 rounded-full ${color}`}
+                      className={`mr-2 rounded-md w-4 transition-transform group-hover:translate-x-1  ${color}`}
                     >
                       <polyline points="9 6 15 12 9 18" />
                     </svg>{" "}
@@ -95,7 +71,6 @@ export default function CategoryCard() {
           )}
         </div>
       </Suspense>
-      )}
     </>
   );
 }

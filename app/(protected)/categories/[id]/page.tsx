@@ -39,7 +39,7 @@ export default async function page({
             return (
               <Card
                 key={task.title}
-                className="p-2 flex w-full justify-between items-center  group ">
+                className={`p-2 flex w-full justify-between items-center bor   group  `}>
                 <div className="flex items-center gap-2 transition-transform justify-between group-hover:translate-x-1">
                   <ArrowRight status={task.status} />
                   <span className="text-base text-balance tracking-tighter font-thin">
