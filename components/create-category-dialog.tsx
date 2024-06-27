@@ -69,22 +69,25 @@ export function CategoryDialog({
   moment.locale('es');
   const newDate = moment(date).fromNow();
 
-  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    const result = await handleSubmitCategory(type, id, name, color);
-    if (result?.success) {
-      router.refresh();
-      const toastes = type === "create" ? "✅ Se creo la categoria con exito " : "✅ Se edito la ta categoria con exito"
-      toast({
-        title: toastes
-      })
-      console.log('Operación exitosa:', result.data);
-    } else {
+  const handleFormSubmit = async () => {
+    try {
+      const result = await handleSubmitCategory(type, id, name, color);
+      if (result?.success) {
+        const toastes = type === "create" ? "✅ Se creo la categoria con exito " : "✅ Se edito la ta categoria con exito"
+        toast({
+          title: toastes
+        })
+        router.refresh();
+      }
+    }
+
+      catch (error) {
       // Manejar errores aquí
       toast({
         variant: "destructive",
         title: '❌ Hubo un error, Vuelva a intentar'
       })
-      console.error('Error en la operación:', result?.error);
+      console.error('Error en la operación:', error);
     }
   };
 

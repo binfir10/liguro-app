@@ -6,6 +6,8 @@ import { Card } from "@/components/ui/card";
 import { getCategoryById, getTasks } from "@/lib/actions/get-actions";
 import { ITasks } from "@/types/types";
 import { BadgePlus, Car } from "lucide-react";
+import { Suspense } from "react";
+import CategoryCardSkeleton from "./loading";
 
 export default async function page({
   params: { id },
@@ -33,6 +35,8 @@ export default async function page({
           />
         </div>
       </div>
+      <Suspense fallback={<CategoryCardSkeleton/>}>
+
       <div className="flex flex-col gap-1">
         {tasks.length !== 0 ? (
           tasks.map((task: ITasks) => {
@@ -56,6 +60,7 @@ export default async function page({
           </span>
         )}
       </div>
+            </Suspense>
     </div>
   );
 }

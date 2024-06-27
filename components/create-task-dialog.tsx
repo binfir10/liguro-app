@@ -68,34 +68,37 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
 
   let types = type === "create" ? "Crea una" : "Edita la";
 
-  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    const result = await handleSubmitTask(
-      type,
-      id,
-      category_id,
-      title,
-      status,
-      description
-    );
-    if (result?.success) {
-      
-      const toastes =
-        type === "create"
-          ? "✅ Se creo la tarea con exito"
-          : "✅ Se edito la ta tarea con exito";
-      toast({
-        title: toastes,
-      });
-router.refresh();
-      
-    } else {
-      // Manejar errores aquí
+  const handleFormSubmit = async () => {
+    try {
+      const result = await handleSubmitTask(
+        type,
+        id,
+        category_id,
+        title,
+        status,
+        description
+      );
+      if (result?.success) {
+
+        const toastes =
+          type === "create"
+            ? "✅ Se creo la tarea con exito"
+            : "✅ Se edito la ta tarea con exito";
+        toast({
+          title: toastes,
+        });
+        router.refresh();
+
+      }
+    } catch (error) {
       toast({
         variant: "destructive",
         title: "❌ Hubo un error, Vuelva a intentar",
       });
-      console.error("Error en la operación:", result?.error);
+      console.error("Error en la operación:", error);
+    
     }
+  
   };
 
 
