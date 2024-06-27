@@ -69,8 +69,9 @@ export function CategoryDialog({
   moment.locale('es');
   const newDate = moment(date).fromNow();
 
-  const handleFormSubmit = async () => {
-    try {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();    
+try {
       const result = await handleSubmitCategory(type, id, name, color);
       if (result?.success) {
         const toastes = type === "create" ? "✅ Se creo la categoria con exito " : "✅ Se edito la ta categoria con exito"
