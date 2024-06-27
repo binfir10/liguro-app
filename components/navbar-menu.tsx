@@ -24,7 +24,7 @@ export default function NavbarMenu() {
   return (
     <>
     <Link href={"/"} className="font-black underline underline-offset-4 flex items-center justify-center decoration-purple-500">
-    <Image src={"/icon-144x144.png"} alt="" width={1000} height={1000} className="size-10 rounded-full" />
+    <Image src={"/icon-192x192.png"} alt="" width={1000} height={1000} className="size-10 rounded-full" />
     <span className="font-extrabold text-2xl text-purple-100 hover:text-purple-200">
 
     LIGURO
