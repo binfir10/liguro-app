@@ -78,7 +78,7 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
       description
     );
     if (result?.success) {
-      router.refresh();
+      
       const toastes =
         type === "create"
           ? "✅ Se creo la tarea con exito"
@@ -86,7 +86,9 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
       toast({
         title: toastes,
       });
-      console.log("Operación exitosa:", result.data);
+router.refresh();
+      
+ result.data);
     } else {
       // Manejar errores aquí
       toast({
