@@ -68,8 +68,9 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
 
   let types = type === "create" ? "Crea una" : "Edita la";
 
-  const handleFormSubmit = async () => {
-    try {
+  const handleFormSubmit = async ( e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+   try {
       const result = await handleSubmitTask(
         type,
         id,
