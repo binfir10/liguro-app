@@ -9,7 +9,7 @@ import { BadgePlus } from "lucide-react";
 export default async function page() {
   const categories: ICategories[] = await getCategories();
   return (
-    <div className="mt-5 p-3 items-center">
+    <div className="p-3 items-center">
       <div className="flex items-center justify-between text-center py-4">
         <h1 className="font-bold max-sm:text-3xl text-5xl">Categorias</h1>
         <CategoryDialog
