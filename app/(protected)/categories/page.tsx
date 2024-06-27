@@ -5,7 +5,6 @@ import { getCategories } from "@/lib/actions/get-actions";
 import { ICategories } from "@/types/types";
 import { BadgePlus } from "lucide-react";
 
-export const revalidate = 0
 
 export default async function page() {
   const categories: ICategories[] = await getCategories();
