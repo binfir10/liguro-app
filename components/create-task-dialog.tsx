@@ -88,7 +88,6 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
       });
 router.refresh();
       
- result.data);
     } else {
       // Manejar errores aquí
       toast({
