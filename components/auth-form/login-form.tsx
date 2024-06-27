@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Separator } from "../ui/separator";
+import { Loader2 } from "lucide-react";
 
 export default async function Login({
   searchParams,
@@ -20,7 +21,7 @@ export default async function Login({
         <SubmitButton
           formAction={signWithGoogle}
           className="flex justify-center gap-4 px-4 py-2 w-full items-center mb-2"
-          pendingText="Signing Up...">
+          pendingText={`Inciando Sesion`}>
           <Image
             src="/google.png"
             alt="google"
@@ -50,8 +51,7 @@ export default async function Login({
         </div>
         <SubmitButton
           formAction={signIn}
-          className=""
-          pendingText="Iniciando Sesion...">
+          pendingText={`Inciando Sesion`}>
           Iniciar Sesion
         </SubmitButton>
       </form>

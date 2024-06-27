@@ -102,7 +102,17 @@ export default function AccountForm({ user }: { user: User | null }) {
     }
 
     return (
-        <section className="">
+        <section className="p-3">
+            <div className="flex items-center justify-between text-center py-4">
+            <h1>Tu Cuenta</h1>
+
+            <Button
+                className={`${loading ? "cursor-not-allowed" : ""}`}
+                onClick={() => router.push("/categories")}
+                disabled={loading}>
+                {loading ? "Cargando" : "Omitir"}
+            </Button>
+                    </div>
             <div className="mb-4 mt-4">
                 <Label htmlFor="email">Email</Label>
                 <Input id="email" type="text" value={user?.email} disabled />
@@ -147,13 +157,15 @@ export default function AccountForm({ user }: { user: User | null }) {
                 publicId={public_id}
             />*/}
 
-            <div className="mb-4 mt-4">
+            <div className="mb-4 mt-4 ">
+
                 <Button
-                    className={`${loading ? "cursor-not-allowed" : ""}`}
+                    className={`${loading ? "cursor-not-allowed" : ""} w-full`}
                     onClick={() => updateProfile({name: fullname })}
                     disabled={loading}>
                     {loading ? "Actualizando ..." : "Actualizar"}
                 </Button>
+   
             </div>
         </section>
     );

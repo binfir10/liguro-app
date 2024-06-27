@@ -3,8 +3,8 @@ import { Toaster } from "@/components/ui/toaster";
 import type { Metadata, Viewport } from "next";
 import { Fira_Code } from "next/font/google";
 import "./globals.css";
-
-const firacode = Fira_Code({ subsets: ["latin"] });
+import { ViewTransitions } from 'next-view-transitions'
+const firacode = Fira_Code({ subsets: ["latin"], weight:["300","400","500","600","700"] });
 
 const APP_NAME = "Liguro";
 const APP_DEFAULT_TITLE = "Liguro";
@@ -59,6 +59,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ViewTransitions>
+
     <html lang="es" suppressHydrationWarning>
       <body className={`${firacode.className} min-h-dvh`}>
         <ThemeProvider
@@ -73,5 +75,6 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
+            </ViewTransitions>
   );
 }

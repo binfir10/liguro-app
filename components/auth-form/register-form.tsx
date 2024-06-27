@@ -19,7 +19,7 @@ export default async function Register({
         <SubmitButton
           formAction={signWithGoogle}
           className="flex justify-center gap-4 px-4 py-2 w-full items-center mb-2"
-          pendingText="Signing Up...">
+          pendingText={`Inciando Sesion`}>
           <Image
             src="/google.png"
             alt="google"
@@ -47,7 +47,8 @@ export default async function Register({
             required
           />
         </div>
-        <SubmitButton formAction={signUp} pendingText="Registrando...">
+        <SubmitButton formAction={signUp} 
+          pendingText={`Registrando`}>
           Registrarse
         </SubmitButton>
 

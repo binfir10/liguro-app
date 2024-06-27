@@ -66,7 +66,7 @@ export const signUp = async (formData: FormData) => {
 
   await createUserProfile(data?.user?.id ?? "", email);
 
-  return redirect("categories");
+  return redirect("account");
 };
 
 async function createUserProfile(userId: string, email: string) {
@@ -84,7 +84,7 @@ async function createUserProfile(userId: string, email: string) {
     return redirect("/auth?message=Could not authenticate user");
   } else {
     console.log("Perfil de usuario creado:", data);
-    return redirect("/categories");
+    return redirect("/account");
   }
 }
 

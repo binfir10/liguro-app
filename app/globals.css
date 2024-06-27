@@ -75,5 +75,9 @@
   }
 
   h1{
-    @apply text-primary underline underline-offset-8 decoration-primary/20;
+    @apply text-primary underline underline-offset-8 decoration-primary/20 mr-5 capitalize max-sm:text-3xl text-5xl text-left text-balance;
+  }
+
+  .isDisabled {
+    @apply cursor-not-allowed hover:bg-transparent text-muted hover:text-muted
   }

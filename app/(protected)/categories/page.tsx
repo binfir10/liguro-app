@@ -10,8 +10,8 @@ export default async function page() {
   const categories: ICategories[] = await getCategories();
   return (
     <div className="p-3 items-center">
-      <div className="flex items-center justify-between text-center py-4">
-        <h1 className="font-bold max-sm:text-3xl text-5xl">Categorias</h1>
+      <div className="flex items-center justify-between max-[350px]:flex-col max-[350px]:gap-5 text-center py-4">
+        <h1>Categorias</h1>
         <CategoryDialog
           trigger={
             <Button variant="default">

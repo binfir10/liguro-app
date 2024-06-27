@@ -1,8 +1,5 @@
 
 'use client'
-import { useTheme } from "next-themes"
-import Image from "next/image"
-import Link from 'next/link'
 import {
   Sheet,
   SheetContent,
@@ -11,11 +8,13 @@ import {
   SheetTitle,
   SheetTrigger
 } from "@/components/ui/sheet"
-import { MenuIcon } from 'lucide-react'
-import { ModeToggle } from './ui/theme-toggle'
-import { useEffect, useState } from "react"
-import { Button } from "./ui/button"
 import { signOut } from "@/lib/actions/auth-actions"
+import { MenuIcon } from 'lucide-react'
+import { Link } from "next-view-transitions"
+import Image from "next/image"
+import { useState } from "react"
+import { Button } from "./ui/button"
+import { ModeToggle } from './ui/theme-toggle'
 
 export default function NavbarMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,9 +22,9 @@ export default function NavbarMenu() {
 
   return (
     <>
-    <Link href={"/"} className="font-black underline underline-offset-4 flex items-center justify-center decoration-purple-500">
+    <Link href={"/categories"} className="font-black underline underline-offset-4 flex items-center justify-center decoration-violet-500">
     <Image src={"/icon-192x192.png"} alt="" width={1000} height={1000} className="size-10 rounded-full" />
-    <span className="font-extrabold text-2xl text-purple-100 hover:text-purple-200">
+    <span className="font-extrabold text-2xl text-violet-100 transition duration-150 hover:text-violet-200">
 
     LIGURO
     </span>
@@ -36,7 +35,7 @@ export default function NavbarMenu() {
         <ModeToggle />
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
-            <MenuIcon className='hover:text-background cursor-pointer' />
+            <MenuIcon className='hover:text-violet-300 cursor-pointer' />
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
@@ -45,13 +44,14 @@ export default function NavbarMenu() {
             </SheetHeader>
 
             <SheetFooter>
-              <Link href={'/categories'} className='mr-4' onClick={() => setIsOpen(false)}>Categories</Link>
+              <Link href={'/categories'}  onClick={() => setIsOpen(false)}>Categories</Link>
+              <Link href={'/account'}  onClick={() => setIsOpen(false)}>Cuenta</Link>
               <form
                 action={signOut}
                 className="">
-                <Button  variant={"link"}>
+                <button className="text-primary">
                   Cerrar Sesion
-                </Button>
+                </button>
               </form>
             </SheetFooter>
           </SheetContent>

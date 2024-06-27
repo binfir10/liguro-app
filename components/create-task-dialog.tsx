@@ -29,6 +29,7 @@ import moment from "moment";
 import { useParams, useRouter } from "next/navigation";
 import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { toast } from "./ui/use-toast";
+import { Loader2 } from "lucide-react";
 interface Props {
   trigger?: ReactNode;
   type: TaskType;
@@ -38,6 +39,7 @@ interface Props {
 }
 
 export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const [task, setTask] = useState<ITasks | null>(null);
   const [title, setTitle] = useState("");
@@ -68,9 +70,10 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
 
   let types = type === "create" ? "Crea una" : "Edita la";
 
-  const handleFormSubmit = async ( e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-   try {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
       const result = await handleSubmitTask(
         type,
         id,
@@ -80,16 +83,14 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
         description
       );
       if (result?.success) {
-
         const toastes =
           type === "create"
             ? "✅ Se creo la tarea con exito"
-            : "✅ Se edito la ta tarea con exito";
+            : "✅ Se edito la tarea con exito";
         toast({
           title: toastes,
         });
         router.refresh();
-
       }
     } catch (error) {
       toast({
@@ -97,11 +98,13 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
         title: "❌ Hubo un error, Vuelva a intentar",
       });
       console.error("Error en la operación:", error);
-    
+    } finally {
+      setIsLoading(false);
+      setTitle("");
+      setStatus("");
+      setCreateAt("");
     }
-  
   };
-
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -166,8 +169,21 @@ export function TaskDialog({ trigger, setIsOpen, isOpen, type, id }: Props) {
 
           <DialogFooter className="sm:justify-start mt-5">
             <DialogClose asChild>
-              <Button type="submit" variant="default" className="w-full">
-                {type === "create" ? "Agregar" : "Actualizar"}
+              <Button
+                type="submit"
+                variant="default"
+                className="w-full"
+                disabled={isLoading || !title || !status}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    {type === "create" ? "Agregando" : "Actualizando"}
+                  </>
+                ) : type === "create" ? (
+                  "Agregar"
+                ) : (
+                  "Actualizar"
+                )}
               </Button>
             </DialogClose>
           </DialogFooter>

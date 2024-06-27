@@ -19,7 +19,6 @@ export const getCategories = async (): Promise<ICategories[]> => {
       .from("categories")
       .select("*")
       .eq("user_id", userId)
-      .order("created_at", { ascending: false });
 
     if (error) {
       console.error("Error fetching categories:", error);

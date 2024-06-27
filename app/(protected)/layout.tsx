@@ -1,6 +1,7 @@
 import Navbar from "@/components/navbar";
 import { Toaster } from "@/components/ui/toaster";
 import { createClient } from "@/utils/supabase/server";
+import { ViewTransitions } from "next-view-transitions";
 import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({
@@ -17,7 +18,8 @@ export default async function DashboardLayout({
     redirect("/auth");
   }
   return (
-    <>
+    <ViewTransitions>
+
       <Navbar />
 
     <section className="max-w-5xl w-full">
@@ -25,6 +27,6 @@ export default async function DashboardLayout({
       <Toaster />
 
     </section>
-    </>
+    </ViewTransitions>
   );
 }
