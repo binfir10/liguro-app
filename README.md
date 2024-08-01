@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Liguro App
 
-## Getting Started
+## Descripción
 
-First, run the development server:
+Liguro App es una aplicación de gestión de tareas donde los usuarios pueden ingresar categorías y, dentro de cada categoría, añadir, editar y borrar tareas. La aplicación está desarrollada con Next.js, Tailwind CSS y TypeScript, utilizando Supabase para la base de datos y la autenticación de usuarios.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tecnologías
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Next.js**: Framework para React que permite el renderizado del lado del servidor y la generación de sitios estáticos.
+- **Tailwind CSS**: Framework de CSS para diseño rápido y flexible.
+- **TypeScript**: Superset de JavaScript que añade tipos estáticos.
+- **Supabase**: Plataforma backend-as-a-service que proporciona base de datos, autenticación y almacenamiento.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Caracteristicas
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Categorías: Crea, edita y borra categorías.
+- Tareas: Dentro de cada categoría, puedes crear, editar y eliminar tareas.
+- Autenticación: Registro y inicio de sesión de usuarios utilizando Supabase.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Configuración del Entorno
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clona el repositorio**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```bash
+   git clone https://github.com/brianfigueroa10/liguro-app.git
+   cd liguro-app
+   ```
 
-## Deploy on Vercel
+2. **Instalar las dependencias:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```bash
+    cd liguro-app
+    npm install
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. **Iniciar la aplicación:**
+
+    ```bash
+    npm run dev
+    ```
+
+4. **Abrir en tu navegador:** Abre `http://localhost:3000` en tu navegador web favorito.
+
+## Ejemplo de Uso
+
+1. **Explorar el catálogo:** Navega por la lista de productos disponibles y consulta sus detalles.
+2. **Agregar al carrito:** Haz clic en el botón "Agregar al carrito" para añadir productos al carrito de compras.
+3. **Gestionar el carrito:** Ve al carrito de compras para ajustar las cantidades de los productos seleccionados.
+
+## Captura de Pantalla
+
+![Captura de Pantalla](https://res.cloudinary.com/dv4ukplcm/image/upload/f_auto,q_auto/v1/proyects/vszb6vt8mohgl9c7r2g0)
+
+## Contribuciones
+
+Las contribuciones son bienvenidas. Si deseas contribuir a este proyecto, por favor sigue estos pasos:
+
+1. **Fork este repositorio.**
+2. **Crea una rama con tu nueva característica (`git checkout -b feature/nueva-caracteristica`).**
+3. **Haz commit de tus cambios (`git commit -m 'Agrega nueva característica'`).**
+4. **Push a la rama (`git push origin feature/nueva-caracteristica`).**
+5. **Abre un Pull Request.**
+
+   
