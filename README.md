@@ -50,7 +50,7 @@ Liguro App es una aplicación de gestión de tareas donde los usuarios pueden in
 
 ## Captura de Pantalla
 
-![Captura de Pantalla](https://res.cloudinary.com/dv4ukplcm/image/upload/f_auto,q_auto/v1/proyects/vszb6vt8mohgl9c7r2g0)
+![Captura de Pantalla](https://res.cloudinary.com/dv4ukplcm/image/upload/f_auto,q_auto/v1/proyects/otahig2jdeidkz1e00hb)
 
 ## Contribuciones
 
